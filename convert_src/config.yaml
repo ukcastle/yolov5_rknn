@@ -1,0 +1,26 @@
+# ------ ONNX ------
+SIZE : [320, 320]
+ONNX_OPSET : 11
+DATASET : "data/face_detection.yaml"
+pt : "best.pt"
+onnx : "best.onnx"
+rknn : "best.rknn"
+
+# ------ RKNN ------
+VERBOSE : False
+CONFIG_DICT : 
+  "batch_size" : 10
+  "mean_values" : [[0, 0, 0]]
+  "std_values" : [[255, 255, 255]]
+  "reorder_channel" : "2 1 0"
+  "epochs" : 100
+  "quantized_dtype" : "asymmetric_quantized-u8"
+  "target_platform" : "rv1109"
+  "optimization_level" : 3   # 3일때 가장 빠름, 작아질수록 느려지고 정확도 소폭상승, 정확도 차이는 없었고 tact time도 유의미한 차이는 아니었음
+  # "quantized_algorithm" : "mmse" # 오래걸림
+  "output_optimize" : 1
+
+BUILD_DICT : 
+  "do_quantization" : True
+  "pre_compile" : True
+  "dataset" : "convert_src/dataset/data.txt"
