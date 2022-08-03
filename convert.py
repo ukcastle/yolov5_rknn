@@ -33,7 +33,7 @@ class TimeChecker:
 
 def parseArg():
   parser = argparse.ArgumentParser()
-  parser.add_argument("--weights", required=True)
+  parser.add_argument("-w","--weights", "--weight", required=True)
   return parser.parse_args()
 
 def main(expPath):
@@ -54,6 +54,6 @@ if __name__ == '__main__':
   onnx2rknn = timeChecker.wrap(onnx2rknn)
 
   args = parseArg()
-  main(Path(args.exp))
+  main(Path(args.weights))
   
   timeChecker.printTime()
