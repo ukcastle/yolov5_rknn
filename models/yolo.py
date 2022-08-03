@@ -39,6 +39,7 @@ class Detect(nn.Module):
     stride = None  # strides computed during build
     onnx_dynamic = False  # ONNX export parameter
     export = False  # export mode
+    isRknnExport = False
 
     def __init__(self, nc=80, anchors=(), ch=(), inplace=True):  # detection layer
         super().__init__()
@@ -53,6 +54,10 @@ class Detect(nn.Module):
         self.inplace = inplace  # use inplace ops (e.g. slice assignment)
 
     def forward(self, x):
+
+        if self.isRknnExport:
+            return x # remove detect head 
+
         z = []  # inference output
         for i in range(self.nl):
             x[i] = self.m[i](x[i])  # conv
