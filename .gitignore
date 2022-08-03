@@ -254,3 +254,8 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+
+# RKNN
+
+rknn_toolkit-1.7.1-cp36-cp36m-linux_x86_64.whl
