@@ -3,7 +3,7 @@
 
 # RKNN ----------------------------------------
 mxnet==1.5.0
-tensorflow-gpu==1.11.0
+tensorflow-gpu==1.15.0
 torch==1.9.0
 torchvision==0.10.0 
 torchaudio==0.9.0
@@ -20,7 +20,7 @@ tqdm>=4.64.0
 protobuf<=3.20.1  # https://github.com/ultralytics/yolov5/issues/8012
 
 # Logging -------------------------------------
-tensorboard
+tensorboard==1.15.0
 wandb
 
 # Plotting ------------------------------------
