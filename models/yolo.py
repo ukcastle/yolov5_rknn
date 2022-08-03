@@ -54,9 +54,10 @@ class Detect(nn.Module):
         self.inplace = inplace  # use inplace ops (e.g. slice assignment)
 
     def forward(self, x):
-
         if self.isRknnExport:
-            return x # remove detect head 
+            for i in range(self.nl):
+              x[i] = self.m[i](x[i])  # conv
+            return x
 
         z = []  # inference output
         for i in range(self.nl):
@@ -80,6 +81,7 @@ class Detect(nn.Module):
                 z.append(y.view(bs, -1, self.no))
 
         return x if self.training else (torch.cat(z, 1),) if self.export else (torch.cat(z, 1), x)
+
 
     def _make_grid(self, nx=20, ny=20, i=0):
         d = self.anchors[i].device
